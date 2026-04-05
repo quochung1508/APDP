@@ -1,0 +1,111 @@
+﻿@model SIMS.Models.EditUserViewModel
+
+@{
+    // Inherit the main Layout
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var roleName = Model.Role == "Student" ? "Student" : "Teacher";
+    ViewData["title"] = $"Edit {roleName}";
+    ViewData["breadcrumb"] = "Accounts";
+    ViewData["breadcrumb_item"] = $"Edit Account";
+}
+
+<div class="card shadow-sm">
+    <div class="card-header bg-light py-3">
+        <h5 class="mb-0">
+            <i class="fas fa-edit me-2"></i>Edit Information: @Model.UserName
+        </h5>
+    </div>
+    <form asp-action="Edit" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger px-3 pt-3"></div>
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Role" />
+
+        <div class="card-body">
+            <div class="row">
+                <!-- Left column: Personal Information -->
+                <div class="col-md-6 border-end pe-4">
+                    <h6 class="text-primary mb-3"><i class="fas fa-user-circle me-2"></i>Personal Information</h6>
+
+                    <div class="mb-3">
+                        <label asp-for="FullName" class="form-label fw-bold"></label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="DateOfBirth" class="form-label fw-bold"></label>
+                        <input asp-for="DateOfBirth" type="date" class="form-control" />
+                        <span asp-validation-for="DateOfBirth" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Gender" class="form-label fw-bold"></label>
+                        <select asp-for="Gender" class="form-select">
+                            <option value="">-- Select Gender --</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span asp-validation-for="Gender" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="PhoneNumber" class="form-label fw-bold"></label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Address" class="form-label fw-bold"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <!-- Right column: Account & Security -->
+                <div class="col-md-6 ps-4">
+                    <h6 class="text-primary mb-3"><i class="fas fa-shield-alt me-2"></i>Account & Security</h6>
+
+                    <div class="mb-3 bg-light p-2 rounded">
+                        <label asp-for="ProfileId" class="form-label text-muted small"></label>
+                        <input asp-for="ProfileId" class="form-control-plaintext ps-2" readonly />
+                    </div>
+
+                    <div class="mb-3 bg-light p-2 rounded">
+                        <label asp-for="UserName" class="form-label text-muted small"></label>
+                        <input asp-for="UserName" class="form-control-plaintext ps-2" readonly />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label fw-bold"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <p class="small text-muted mb-2">Leave blank if you don't want to change the password.</p>
+                    <div class="mb-3">
+                        <label asp-for="NewPassword" class="form-label fw-bold"></label>
+                        <input asp-for="NewPassword" type="password" class="form-control" autocomplete="new-password" />
+                        <span asp-validation-for="NewPassword" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ConfirmPassword" class="form-label fw-bold"></label>
+                        <input asp-for="ConfirmPassword" type="password" class="form-control" autocomplete="new-password" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-end bg-light">
+            <a asp-action="ManageUsers" class="btn btn-secondary me-2">
+                <i class="fas fa-times me-2"></i>Cancel
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save me-2"></i>Save Changes
+            </button>
+        </div>
+    </form>
+</div>

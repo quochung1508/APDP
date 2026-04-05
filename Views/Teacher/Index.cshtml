@@ -1,0 +1,76 @@
+﻿@model IEnumerable<SIMS.Models.TeacherListViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "Danh sách Giáo viên";
+    ViewData["breadcrumb"] = "Giáo viên";
+    ViewData["breadcrumb_item"] = "Quản lý Giáo viên";
+}
+
+<div class="card shadow-sm">
+    <!-- Card Header -->
+    <div class="card-header bg-light py-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-chalkboard-teacher me-2"></i>Danh sách Giáo viên</h5>
+            <div class="d-flex">
+                <form class="me-2">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm giáo viên...">
+                        <button class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Body -->
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="py-3 ps-3">Mã giáo viên</th>
+                        <th class="py-3">Họ và tên</th>
+                        <th class="py-3">Tên đăng nhập</th>
+                        <th class="py-3">Email</th>
+                        <th class="py-3 text-center">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var teacher in Model)
+                    {
+                        <tr>
+                            <td class="ps-3">@teacher.TeacherNumber</td>
+                            <td>@teacher.FullName</td>
+                            <td>@teacher.UserName</td>
+                            <td>@teacher.Email</td>
+                            <td class="text-center">
+                                <a asp-controller="Accounts" asp-action="Edit" asp-route-id="@teacher.UserId" class="btn btn-sm btn-outline-primary me-1" title="Sửa">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-controller="Accounts" asp-action="Delete" asp-route-id="@teacher.UserId" class="btn btn-sm btn-outline-danger" title="Xóa">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Card Footer -->
+    <div class="card-footer bg-light py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="text-muted small">Hiển thị 1 đến 10 của 25 giáo viên</span>
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item disabled"><a class="page-link" href="#">Trước</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Sau</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

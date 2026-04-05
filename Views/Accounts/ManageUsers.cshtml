@@ -1,0 +1,116 @@
+﻿@model IEnumerable<SIMS.Models.UserListItemViewModel>
+
+@{
+    var roleFilter = ViewData["ActiveRoleFilter"] as string ?? "All";
+    var title = "Manage Users";
+    var icon = "fa-users";
+
+    if (roleFilter.Equals("Teacher", StringComparison.OrdinalIgnoreCase))
+    {
+        title = "Manage Teachers";
+        icon = "fa-chalkboard-teacher";
+    }
+    else if (roleFilter.Equals("Student", StringComparison.OrdinalIgnoreCase))
+    {
+        title = "Manage Students";
+        icon = "fa-user-graduate";
+    }
+
+    // Use the main layout
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Define ViewData for the layout
+    ViewData["title"] = title;
+    ViewData["breadcrumb"] = "Accounts";
+    ViewData["breadcrumb_item"] = title;
+}
+
+@* Display success/error messages from TempData *@
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="card shadow-sm">
+    <div class="card-header bg-light py-3 d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+            <i class="fas @icon me-2"></i> @title
+        </h5>
+        <form asp-action="ManageUsers" method="get">
+            <div class="input-group input-group-sm">
+                <input type="hidden" name="role" value="@ViewData["ActiveRoleFilter"]" />
+                <input type="text" name="searchString" class="form-control" placeholder="Search..." value="@ViewData["CurrentFilter"]" />
+                <button type="submit" class="btn btn-outline-primary"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover" id="usersDataTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th class="text-center">Role</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@user.Id</td>
+                                <td>@user.UserName</td>
+                                <td>@user.Email</td>
+                                <td>@user.PhoneNumber</td>
+                                <td class="text-center">
+                                    @{
+                                        var role = user.Role;
+                                        var badgeClass = "bg-secondary";
+                                        if (role == "Admin") { badgeClass = "bg-danger text-white"; }
+                                        else if (role == "Teacher") { badgeClass = "bg-primary text-white"; }
+                                        else if (role == "Student") { badgeClass = "bg-success text-white"; }
+                                    }
+                                    <span class="badge @badgeClass">@role</span>
+                                </td>
+                                <td class="text-center">
+                                    <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-sm btn-outline-info me-1" title="Edit User">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-sm btn-outline-danger" title="Delete User">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // The Simple-DataTables library is already loaded globally in scripts.js
+            // We just need to initialize it on our table
+            const dataTable = new simpleDatatables.DataTable("#usersDataTable");
+        });
+    </script>
+}

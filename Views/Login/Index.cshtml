@@ -1,0 +1,62 @@
+﻿@model SIMS.Models.LoginViewModel
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Login - SIMS</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/login.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-card-header">
+                <h4>Welcome Back!</h4>
+                <p class="text-muted">Sign in to continue to SIMS</p>
+                @if (ViewData["InvalidAccount"] != null)
+                {
+                    <span class="text-danger text-center">
+                        @ViewData["InvalidAccount"]
+                    </span>
+                }
+            </div>
+            <div class="login-card-body">
+                <form method="post" asp-action="Index">
+                    <div class="mb-3">
+                        <input class="form-control" id="username" type="text" placeholder="Username" asp-for="Username" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control" id="inputPassword" type="password" placeholder="Password" asp-for="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                        <a class="small" href="#">Forgot Password?</a>
+                    </div>
+                    <div class="d-grid mt-3">
+                        <button class="btn btn-primary" type="submit">Login</button>
+                    </div>
+                </form>
+            </div>
+            <div class="login-footer">
+                <div class="text-muted">Copyright &copy; BTec FPT 2025</div>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    &middot;
+                    <a href="#">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

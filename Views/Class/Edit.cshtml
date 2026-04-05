@@ -1,0 +1,49 @@
+﻿@model SIMS.DatabaseContext.Entities.Class
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "Edit Classroom";
+    ViewData["breadcrumb"] = "Classroom";
+    ViewData["breadcrumb_item"] = "Edit";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-light py-3">
+                <h5 class="mb-0"><i class="fas fa-edit me-2"></i>Edit Class: @Model.Name</h5>
+            </div>
+            <form asp-action="Edit">
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">Class name</label>
+                        <input asp-for="Name" class="form-control" placeholder="For example: Class 10A1, IT specialized class...">
+                        <span asp-validation-for="Name" class="text-danger small mt-1"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Schedule" class="form-label">Class schedule</label>
+                        <textarea asp-for="Schedule" class="form-control" rows="3" placeholder="Describe the class schedule, for example: Monday, Wednesday, Friday mornings from 7:30 to 11:00"></textarea>
+                        <span asp-validation-for="Schedule" class="text-danger small mt-1"></span>
+                    </div>
+                </div>
+                <div class="card-footer bg-light text-end">
+                    <a asp-action="Index" class="btn btn-secondary me-2">
+                        <i class="fas fa-arrow-left me-2"></i>Back
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>Save changes
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

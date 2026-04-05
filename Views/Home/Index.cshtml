@@ -1,0 +1,175 @@
+﻿@model SIMS.Models.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<style>
+    .dashboard-card {
+        transition: all 0.3s ease;
+        border: none;
+        border-top: 4px solid;
+        border-radius: 8px;
+    }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .dashboard-card.card-primary {
+            border-top-color: #ff6600;
+        }
+
+        .dashboard-card.card-warning {
+            border-top-color: #ffc107;
+        }
+
+        .dashboard-card.card-success {
+            border-top-color: #28a745;
+        }
+
+        .dashboard-card.card-info {
+            border-top-color: #17a2b8;
+        }
+
+    .card-icon {
+        font-size: 32px;
+        opacity: 0.15;
+    }
+
+        .card-icon.icon-primary {
+            color: #ff6600;
+        }
+
+        .card-icon.icon-warning {
+            color: #ffc107;
+        }
+
+        .card-icon.icon-success {
+            color: #28a745;
+        }
+
+        .card-icon.icon-info {
+            color: #17a2b8;
+        }
+
+    .card-label {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        color: #6c757d;
+    }
+
+        .card-label.label-primary {
+            color: #ff6600;
+        }
+
+        .card-label.label-warning {
+            color: #ffc107;
+        }
+
+        .card-label.label-success {
+            color: #28a745;
+        }
+
+        .card-label.label-info {
+            color: #17a2b8;
+        }
+
+    .card-value {
+        font-size: 28px;
+        font-weight: 700;
+        color: #002855;
+    }
+
+    .dashboard-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
+        .dashboard-link:hover {
+            color: inherit;
+        }
+</style>
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="mb-4">
+        <h1 class="h3 mb-0" style="color: #002855; font-weight: 700;">
+            <i class="fas fa-chart-line" style="color: #ff6600;"></i> Dashboard
+        </h1>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row">
+        <!-- Student Card -->
+        <div class="col-lg-3 col-md-6 mb-4">
+            <a href="@Url.Action("Index", "Student")" class="dashboard-link">
+                <div class="card dashboard-card card-primary shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p class="card-label label-primary mb-2">Total Students</p>
+                                <div class="card-value">@Model.TotalStudents</div>
+                            </div>
+                            <i class="fas fa-user-graduate card-icon icon-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Course Card -->
+        <div class="col-lg-3 col-md-6 mb-4">
+            <a href="@Url.Action("Index", "Course")" class="dashboard-link">
+                <div class="card dashboard-card card-warning shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p class="card-label label-warning mb-2">Total Courses</p>
+                                <div class="card-value">@Model.TotalCourses</div>
+                            </div>
+                            <i class="fas fa-book card-icon icon-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Class Card -->
+        <div class="col-lg-3 col-md-6 mb-4">
+            <a href="@Url.Action("Index", "Class")" class="dashboard-link">
+                <div class="card dashboard-card card-success shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p class="card-label label-success mb-2">Total Classes</p>
+                                <div class="card-value">@Model.TotalClasses</div>
+                            </div>
+                            <i class="fas fa-chalkboard-teacher card-icon icon-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Assignment Card -->
+        <div class="col-lg-3 col-md-6 mb-4">                                                                                                                            
+            <a href="@Url.Action("Manage", "ClassAssignments")" class="dashboard-link">
+                <div class="card dashboard-card card-info shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p class="card-label label-info mb-2">Assignments</p>
+                                <div class="card-value">@Model.TotalAssignments</div>
+                            </div>
+                            <i class="fas fa-tasks card-icon icon-info"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

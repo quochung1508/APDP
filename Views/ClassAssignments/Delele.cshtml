@@ -1,0 +1,58 @@
+﻿@model SIMS.DatabaseContext.Entities.ClassAssignment
+
+@{
+    ViewData["Title"] = "Delete Enrollment";
+    ViewData["breadcrumb"] = "Enrollments";
+    ViewData["breadcrumb_item"] = "Delete";
+}
+
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Are you sure?</h4>
+            <p>You are about to permanently delete this enrollment record. This action cannot be undone.</p>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-trash-alt me-1"></i>
+                Confirm Deletion
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Student)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Student.User.UserName)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Teacher)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Teacher.User.UserName)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Class)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Class.Name)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Course)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Course.Name)
+                    </dd>
+                </dl>
+
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="mt-4">
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

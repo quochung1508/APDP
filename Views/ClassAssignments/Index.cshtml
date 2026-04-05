@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Class Assignments";
+    ViewData["breadcrumb"] = "Class Assignments";
+    ViewData["breadcrumb_item"] = "Index";
+}
+
+<div class="container-fluid px-4">
+    <div class="card shadow-lg border-0 rounded-lg mt-5">
+        <div class="card-header"><h3 class="text-center font-weight-light my-4">Class Assignment Management</h3></div>
+        <div class="card-body text-center">
+            <p class="lead mb-4">The old way of listing all individual assignments was inefficient and could lead to data duplication.</p>
+            <p>We have built a powerful new tool to manage assignments by class and course.</p>
+            <div class="mt-4 mb-3">
+                <a class="btn btn-primary btn-lg" asp-action="Manage">
+                    <i class="fas fa-tasks me-2"></i>
+                    Go to the Assignment Management Panel
+                </a>
+            </div>
+        </div>
+        <div class="card-footer text-center py-3">
+            <div class="small">This new panel allows you to add, remove, and view students in a course for a specific class all in one place.</div>
+        </div>
+    </div>
+</div>

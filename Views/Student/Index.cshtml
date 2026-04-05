@@ -1,0 +1,65 @@
+﻿@model IEnumerable<SIMS.Models.StudentListViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "Student List";
+    ViewData["breadcrumb"] = "Student";
+    ViewData["breadcrumb_item"] = "Manage Students";
+}
+
+<div class="card shadow-sm">
+    <!-- Card Header -->
+    <div class="card-header bg-light py-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-users me-2"></i>Student List</h5>
+            <div class="d-flex">
+                <form asp-action="Index" method="get">
+                    <div class="input-group input-group-sm">
+                        <input type="text" name="searchString" class="form-control" placeholder="Search for students..." value="@ViewData["CurrentFilter"]">
+                        <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Body -->
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="py-3 ps-3">Student ID</th>
+                        <th class="py-3">Full Name</th>
+                        <th class="py-3">Date of Birth</th>
+                        <th class="py-3">Gender</th>
+                        <th class="py-3">Phone Number</th>
+                        <th class="py-3 text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var student in Model)
+                    {
+                        <tr>
+                            <td class="ps-3">@student.StudentNumber</td>
+                            <td>@student.FullName</td>
+                            <td>@(student.DateOfBirth.HasValue? student.DateOfBirth.Value.ToString("dd/MM/yyyy") : "N/A")</td>
+                            <td>@student.Gender</td>
+                            <td>@student.PhoneNumber</td>
+                            <td class="text-center">
+                                <a asp-controller="Accounts" asp-action="Edit" asp-route-id="@student.UserId" class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-controller="Accounts" asp-action="Delete" asp-route-id="@student.UserId" class="btn btn-sm btn-outline-danger" title="Delete">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>

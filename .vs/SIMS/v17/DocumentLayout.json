@@ -1,0 +1,351 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\interfaces\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:interfaces\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DB69BA4-E908-4C78-9AB5-68D1A9867F6D}|..\\Test.Sims\\Test.Sims.csproj|d:\\ky5\\applied programming and design principles(4902)\\test.sims\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\controllers\\teachercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:controllers\\teachercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\views\\teacher\\schedule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:views\\teacher\\schedule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\controllers\\subjectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:controllers\\subjectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\controllers\\attendancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:controllers\\attendancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\sims.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:sims.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\controllers\\debugcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:controllers\\debugcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\databasecontext\\simdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:databasecontext\\simdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|d:\\ky5\\applied programming and design principles(4902)\\sims1\\controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16F79AA0-0F4C-88B9-DE6B-71ED53D60481}|SIMS.csproj|solutionrelative:controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T08:28:21.236Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ClassController.cs",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\ClassController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ClassController.cs",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\ClassController.cs",
+              "RelativeToolTip": "Controllers\\ClassController.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAowPcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T06:49:14.559Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Schedule.cshtml",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Views\\Teacher\\Schedule.cshtml",
+              "RelativeDocumentMoniker": "Views\\Teacher\\Schedule.cshtml",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Views\\Teacher\\Schedule.cshtml",
+              "RelativeToolTip": "Views\\Teacher\\Schedule.cshtml",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAE0AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-08T06:17:10.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-08T05:06:10.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "StudentController.cs",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\StudentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\StudentController.cs",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\StudentController.cs",
+              "RelativeToolTip": "Controllers\\StudentController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T11:32:30.532Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SubjectController.cs",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\SubjectController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SubjectController.cs",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\SubjectController.cs",
+              "RelativeToolTip": "Controllers\\SubjectController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T11:32:29.386Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AttendanceController.cs",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\AttendanceController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AttendanceController.cs",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\AttendanceController.cs",
+              "RelativeToolTip": "Controllers\\AttendanceController.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T11:20:11.855Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IAccountService.cs",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Interfaces\\IAccountService.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IAccountService.cs",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Interfaces\\IAccountService.cs",
+              "RelativeToolTip": "Interfaces\\IAccountService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T11:32:12.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\Test.Sims\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "..\\Test.Sims\\UnitTest1.cs",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\Test.Sims\\UnitTest1.cs",
+              "RelativeToolTip": "..\\Test.Sims\\UnitTest1.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAUwIIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T09:26:44.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CourseController.cs",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\CourseController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CourseController.cs",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\CourseController.cs",
+              "RelativeToolTip": "Controllers\\CourseController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAKMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T11:20:14.493Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "Controllers\\LoginController.cs",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "Controllers\\LoginController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T11:32:46.7Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TeacherController.cs",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\TeacherController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TeacherController.cs",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\TeacherController.cs",
+              "RelativeToolTip": "Controllers\\TeacherController.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T11:32:26.419Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "DebugController.cs",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\DebugController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DebugController.cs",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\DebugController.cs",
+              "RelativeToolTip": "Controllers\\DebugController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T11:32:54.872Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "DashboardController.cs",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\DashboardController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DashboardController.cs",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\DashboardController.cs",
+              "RelativeToolTip": "Controllers\\DashboardController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T11:32:58.417Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "SIMS",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\SIMS.csproj",
+              "RelativeDocumentMoniker": "SIMS.csproj",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\SIMS.csproj",
+              "RelativeToolTip": "SIMS.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-07T11:33:06.109Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "SimDbContext.cs",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\DatabaseContext\\SimDbContext.cs",
+              "RelativeDocumentMoniker": "DatabaseContext\\SimDbContext.cs",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\DatabaseContext\\SimDbContext.cs",
+              "RelativeToolTip": "DatabaseContext\\SimDbContext.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T11:32:20.091Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAUwB4AAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T11:20:19.35Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "AccountsController.cs",
+              "DocumentMoniker": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\AccountsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AccountsController.cs",
+              "ToolTip": "D:\\ky5\\Applied Programming and Design Principles(4902)\\SIMS1\\Controllers\\AccountsController.cs",
+              "RelativeToolTip": "Controllers\\AccountsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T11:20:09.279Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1254,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 182,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

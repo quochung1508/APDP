@@ -1,0 +1,109 @@
+﻿@model SIMS.Models.CreateAccountViewModel
+
+@{
+    // Inherit the main Layout
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var roleName = Model.Role == "Student" ? "Student" : "Teacher";
+    ViewData["title"] = $"Create {roleName} Account";
+    ViewData["breadcrumb"] = "Accounts";
+    ViewData["breadcrumb_item"] = "Create Account";
+}
+
+<div class="card shadow-sm">
+    <div class="card-header bg-light py-3">
+        <h5 class="mb-0">
+            <i class="fas fa-user-plus me-2"></i>Create New @roleName Account
+        </h5>
+    </div>
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger px-3 pt-3"></div>
+        <input type="hidden" asp-for="Role" />
+
+        <div class="card-body">
+            <div class="row">
+                <!-- Left column: Personal Information -->
+                <div class="col-md-6 border-end pe-4">
+                    <h6 class="text-primary mb-3"><i class="fas fa-user-circle me-2"></i>Personal Information</h6>
+
+                    <div class="mb-3">
+                        <label asp-for="ProfileId" class="form-label fw-bold"></label>
+                        <input asp-for="ProfileId" class="form-control" />
+                        <span asp-validation-for="ProfileId" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="FullName" class="form-label fw-bold"></label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="DateOfBirth" class="form-label fw-bold"></label>
+                        <input asp-for="DateOfBirth" type="date" class="form-control" />
+                        <span asp-validation-for="DateOfBirth" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Gender" class="form-label fw-bold"></label>
+                        <select asp-for="Gender" class="form-select">
+                            <option value="">-- Select Gender --</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span asp-validation-for="Gender" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Address" class="form-label fw-bold"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="PhoneNumber" class="form-label fw-bold"></label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <!-- Right column: Account Information -->
+                <div class="col-md-6 ps-4">
+                    <h6 class="text-primary mb-3"><i class="fas fa-shield-alt me-2"></i>Account Information</h6>
+
+                    <div class="mb-3">
+                        <label asp-for="UserName" class="form-label fw-bold"></label>
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label fw-bold"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label fw-bold"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-end bg-light">
+            <a asp-action="ManageUsers" class="btn btn-secondary me-2">
+                <i class="fas fa-times me-2"></i>Cancel
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus-circle me-2"></i>Create Account
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
