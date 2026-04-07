@@ -1,327 +1,173 @@
 ﻿@model SIMS.Models.ViewModels.ManageAssignmentsViewModel
-@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-@functions {
-    public string GetAntiXsrfRequestToken()
-    {
-        return Xsrf.GetAndStoreTokens(Context).RequestToken;
-    }
-}
-
 @{
-    ViewData["Title"] = "Manage Class Assignments";
+    ViewData["Title"] = "Quản lý Lịch dạy & Học phần";
 }
 
-<div class="container-fluid px-4">
-    <h1 class="mt-4">@ViewData["Title"]</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Dashboard</a></li>
-        <li class="breadcrumb-item active">Class Assignments</li>
-    </ol>
+<div class="d-flex justify-content-between align-items-center mb-4 mt-3">
+    <h2 class="mb-0">Quản lý Học Phần & Ngoại lệ</h2>
+    <a asp-action="CreateSchedule" class="btn btn-success fw-bold shadow-sm">
+        <i class="fas fa-plus-circle me-1"></i> Lên Lịch Học Mới
+    </a>
+</div>
 
-    <div class="mb-4">
-        <button class="btn btn-success" id="create-assignment-btn" data-bs-toggle="modal" data-bs-target="#assignmentModal">
-            <i class="fas fa-plus me-2"></i>Create New Assignment
-        </button>
-    </div>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show"><i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
+}
 
-    @if (!Model.Classes.Any())
+<div class="accordion" id="classAccordion">
+    @foreach (var cls in Model.Classes)
     {
-        <div class="alert alert-info" role="alert">
-            <h4 class="alert-heading">No classes found!</h4>
-            <p>There are no classes in the system to assign. Please create a class first.</p>
-        </div>
-    }
-    else
-    {
-        <div class="accordion" id="accordionClasses">
-            @foreach (var classItem in Model.Classes.OrderBy(c => c.Name))
-            {
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading-@classItem.Id">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@classItem.Id" aria-expanded="false" aria-controls="collapse-@classItem.Id">
-                            <strong>@classItem.Name</strong>
-                        </button>
-                    </h2>
-                    <div id="collapse-@classItem.Id" class="accordion-collapse collapse" aria-labelledby="heading-@classItem.Id" data-bs-parent="#accordionClasses">
-                        <div class="accordion-body">
-                            @if (!classItem.AssignmentGroups.Any())
+        var accId = "collapseClass_" + cls.Id;
+        <div class="accordion-item mb-3 shadow-sm border-0 rounded">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-bold bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#@accId">
+                    <i class="fas fa-users text-primary me-2"></i> Lớp: @cls.Name
+                </button>
+            </h2>
+            <div id="@accId" class="accordion-collapse collapse" data-bs-parent="#classAccordion">
+                <div class="accordion-body bg-light p-3">
+                    @if (!cls.AssignmentGroups.Any())
+                    {
+                        <p class="text-muted mb-0 fst-italic">Lớp này chưa được lên lịch môn học nào.</p>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            @foreach (var group in cls.AssignmentGroups)
                             {
-                                <div class="text-center p-4 border rounded">
-                                    <p class="text-muted mb-0">No courses have been assigned to this class yet.</p>
-                                </div>
-                            }
-                            else
-                            {
-                                <div class="row">
-                                    @foreach (var group in classItem.AssignmentGroups.OrderBy(g => g.CourseName))
-                                    {
-                                        <div class="col-xl-6 col-md-12 mb-4">
-                                            <div class="card h-100 border-primary">
-                                                <div class="card-header bg-primary text-white">
-                                                    <i class="fas fa-book me-2"></i>
-                                                    <strong>@group.CourseName</strong>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h6 class="card-subtitle mb-2 text-muted">Teacher</h6>
-                                                    <p class="card-text">
-                                                        @if (group.Teacher != null)
-                                                        {
-                                                            <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>
-                                                            @group.Teacher.FullName
-                                                        }
-                                                        else
-                                                        {
-                                                            <span class="text-danger"><i class="fas fa-exclamation-triangle me-2"></i>Not Assigned</span>
-                                                        }
-                                                    </p>
-
-                                                    <hr />
-
-                                                    <h6 class="card-subtitle mb-2 text-muted">Enrolled Students (@group.Students.Count)</h6>
-                                                    @if (!group.Students.Any())
-                                                    {
-                                                        <p class="text-secondary fst-italic">There are no students in this course yet.</p>
-                                                    }
-                                                    else
-                                                    {
-                                                        <ul class="list-group list-group-flush" style="max-height: 200px; overflow-y: auto;">
-                                                            @foreach (var student in group.Students.OrderBy(s => s.FullName))
-                                                            {
-                                                                <li class="list-group-item d-flex justify-content-between align-items-center py-1">
-                                                                    <span><i class="fas fa-user-graduate me-2"></i>@student.FullName</span>
-                                                                    <span class="badge bg-secondary rounded-pill">ID: @student.StudentNumber</span>
-                                                                </li>
-                                                            }
-                                                        </ul>
-                                                    }
-                                                </div>
-                                                <div class="card-footer d-flex justify-content-end bg-light">
-                                                    <button class="btn btn-outline-primary btn-sm edit-assignment-btn"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#assignmentModal"
-                                                            data-class-id="@classItem.Id"
-                                                            data-course-id="@group.CourseId"
-                                                            data-class-name="@classItem.Name"
-                                                            data-course-name="@group.CourseName">
-                                                        <i class="fas fa-pen me-1"></i> Edit
-                                                    </button>
-                                                </div>
-                                            </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="card h-100 border-left-success">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-success fw-bold">@group.CourseName</h5>
+                                            <p class="card-text mb-1"><i class="fas fa-chalkboard-teacher me-2 text-muted"></i>GV: @(group.Teacher?.FullName ?? "Chưa phân công")</p>
+                                            <p class="card-text mb-3"><i class="fas fa-user-graduate me-2 text-muted"></i>Sĩ số: <span class="badge bg-secondary">@group.Students.Count()</span></p>
+                                            
+                                            <button type="button" class="btn btn-sm btn-outline-primary w-100"
+                                                    onclick="openManageModal(@cls.Id, @group.CourseId, '@cls.Name', '@group.CourseName')">
+                                                <i class="fas fa-user-edit me-1"></i> Chỉnh sửa Sinh viên (Học lại/Vượt)
+                                            </button>
                                         </div>
-                                    }
+                                    </div>
                                 </div>
                             }
                         </div>
-                    </div>
+                    }
                 </div>
-            }
+            </div>
         </div>
     }
 </div>
 
-
-<!-- Modal -->
-<div class="modal fade" id="assignmentModal" tabindex="-1" aria-labelledby="assignmentModalLabel" aria-hidden="true">
+<div class="modal fade" id="manageModal" tabindex="-1" data-bs-backdrop="static">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="assignmentModalLabel">Edit Assignment</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title"><i class="fas fa-tools me-2"></i> <span id="modalTitle"></span></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="modalClassId" class="form-label">Class</label>
-                        <select id="modalClassId" class="form-select" asp-items="@ViewData["Classes"] as SelectList"></select>
+            <div class="modal-body bg-light">
+                <input type="hidden" id="modalClassId" />
+                <input type="hidden" id="modalCourseId" />
+                
+                <div class="row mt-3">
+                    <div class="col-md-5">
+                        <label class="fw-bold text-danger"><i class="fas fa-users-slash me-1"></i> Toàn bộ sinh viên khác</label>
+                        <select id="unassignedStudents" class="form-select mt-2" multiple style="height: 300px; font-size:14px;"></select>
+                        <small class="text-muted">Chọn và bấm nút sang phải để cho phép Học Vượt / Học Lại.</small>
                     </div>
-                    <div class="col-md-4">
-                        <label for="modalCourseId" class="form-label">Course</label>
-                        <select id="modalCourseId" class="form-select" asp-items="@ViewData["Courses"] as SelectList"></select>
+                    
+                    <div class="col-md-2 d-flex flex-column justify-content-center align-items-center">
+                        <button type="button" id="btnMoveRight" class="btn btn-success mb-2" title="Thêm vào lớp"><i class="fas fa-angle-double-right"></i> Thêm</button>
+                        <button type="button" id="btnMoveLeft" class="btn btn-danger" title="Xóa khỏi lớp"><i class="fas fa-angle-double-left"></i> Bớt</button>
                     </div>
-                    <div class="col-md-4">
-                        <label for="modalTeacherId" class="form-label">Teacher</label>
-                        <select id="modalTeacherId" class="form-select" asp-items="@ViewData["Teachers"] as SelectList">
-                            <option value="0">-- Unassign Teacher --</option>
-                        </select>
-                    </div>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="col-md-6">
-                        <h6><strong>Unassigned Students</strong></h6>
-                        <ul id="unassigned-list" class="list-group" style="height: 300px; overflow-y: auto;">
-                            <!-- Students loaded via JS -->
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <h6><strong>Assigned Students</strong></h6>
-                        <ul id="assigned-list" class="list-group" style="height: 300px; overflow-y: auto;">
-                            <!-- Students loaded via JS -->
-                        </ul>
+                    
+                    <div class="col-md-5">
+                        <label class="fw-bold text-success"><i class="fas fa-user-check me-1"></i> Sinh viên đang học môn này</label>
+                        <select id="assignedStudents" class="form-select mt-2 border-success" multiple style="height: 300px; font-size:14px;"></select>
+                        <small class="text-muted">Chọn và bấm nút sang trái để Hủy môn / Bảo lưu.</small>
                     </div>
                 </div>
-                <div id="modal-error-alert" class="alert alert-danger mt-3 d-none" role="alert"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="save-assignments">Save Changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+                <button type="button" class="btn btn-primary" onclick="saveAssignments()"><i class="fas fa-save me-1"></i> Lưu thay đổi</button>
             </div>
         </div>
     </div>
 </div>
-<input type="hidden" id="anti-forgery-token" value="@GetAntiXsrfRequestToken()">
+
+@section Styles {
+    <style>
+        .border-left-success {
+            border-left: 4px solid #1cc88a !important;
+        }
+    </style>
+}
 
 @section Scripts {
     <script>
-        $(document).ready(function () {
-            let currentClassId = 0;
-            let currentCourseId = 0;
-            let originalAssignedIds = [];
-            let isCreateMode = false;
+        var initialAssignedIds = []; // Biến lưu danh sách ID ban đầu để so sánh
 
-            // --- Modal Open Event ---
-            $('#assignmentModal').on('show.bs.modal', function (event) {
-                const button = $(event.relatedTarget);
-                isCreateMode = button.attr('id') === 'create-assignment-btn';
+        function openManageModal(classId, courseId, className, courseName) {
+            $('#modalClassId').val(classId);
+            $('#modalCourseId').val(courseId);
+            $('#modalTitle').text('Quản lý Học Phần: ' + courseName + ' (Lớp ' + className + ')');
+            
+            // Xóa dữ liệu cũ
+            $('#unassignedStudents, #assignedStudents').empty();
+            initialAssignedIds = [];
 
-                // Reset previous state
-                $('#modalClassId, #modalCourseId, #modalTeacherId').prop('disabled', false).val(0);
-                $('#unassigned-list, #assigned-list').empty();
-                $('#modal-error-alert').addClass('d-none').text('');
+            // Gọi AJAX lấy dữ liệu
+            $.get('@Url.Action("GetStudentsForAssignment", "ClassAssignments")', { classId: classId, courseId: courseId }, function (data) {
+                // Đổ data chưa gán
+                data.unassigned.forEach(s => $('#unassignedStudents').append(new Option(s.name + ' (' + s.id + ')', s.id)));
+                // Đổ data đã gán
+                data.assigned.forEach(s => {
+                    $('#assignedStudents').append(new Option(s.name + ' (' + s.id + ')', s.id));
+                    initialAssignedIds.push(s.id.toString());
+                });
+                $('#manageModal').modal('show');
+            });
+        }
 
-                if (isCreateMode) {
-                    // --- CREATE MODE ---
-                    $('#assignmentModalLabel').text('Create New Assignment');
-                    // Enable dropdowns for selection
-                    $('#modalClassId, #modalCourseId').on('change', function() {
-                        const classId = $('#modalClassId').val();
-                        const courseId = $('#modalCourseId').val();
-                        if (classId > 0 && courseId > 0) {
-                            loadDataForModal(classId, courseId);
-                        }
-                    });
+        // JS Di chuyển sinh viên qua lại
+        $('#btnMoveRight').click(function () { $('#unassignedStudents option:selected').appendTo('#assignedStudents'); });
+        $('#btnMoveLeft').click(function () { $('#assignedStudents option:selected').appendTo('#unassignedStudents'); });
 
-                } else {
-                    // --- EDIT MODE ---
-                    currentClassId = button.data('class-id');
-                    currentCourseId = button.data('course-id');
-                    const className = button.data('class-name');
-                    const courseName = button.data('course-name');
+        // JS Lưu dữ liệu
+        function saveAssignments() {
+            var classId = $('#modalClassId').val();
+            var courseId = $('#modalCourseId').val();
+            
+            // Lấy danh sách ID hiện tại ở cột bên phải
+            var currentAssignedIds = [];
+            $('#assignedStudents option').each(function() { currentAssignedIds.push($(this).val()); });
 
-                    $('#assignmentModalLabel').text(`Edit: ${courseName} - ${className}`);
+            // So sánh để tìm ra người mới thêm và người bị xóa
+            var idsToAdd = currentAssignedIds.filter(id => !initialAssignedIds.includes(id));
+            var idsToRemove = initialAssignedIds.filter(id => !currentAssignedIds.includes(id));
 
-                    // Set and disable dropdowns
-                    $('#modalClassId').val(currentClassId).prop('disabled', true);
-                    $('#modalCourseId').val(currentCourseId).prop('disabled', true);
+            var payload = {
+                ClassId: parseInt(classId),
+                CourseId: parseInt(courseId),
+                TeacherId: -1, // Backend tự động giữ nguyên GV cũ
+                StudentIdsToAdd: idsToAdd.map(Number),
+                StudentIdsToRemove: idsToRemove.map(Number)
+            };
 
-                    loadDataForModal(currentClassId, currentCourseId);
+            // Gửi dữ liệu cập nhật về Server
+            $.ajax({
+                url: '@Url.Action("UpdateAssignments", "ClassAssignments")',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(payload),
+                headers: { 'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() },
+                success: function (res) {
+                    if (res.success) { location.reload(); }
+                    else { alert('Lỗi: ' + res.message); }
                 }
             });
-
-            function loadDataForModal(classId, courseId) {
-                currentClassId = classId;
-                currentCourseId = courseId;
-
-                $.ajax({
-                    url: '@Url.Action("GetStudentsForAssignment", "ClassAssignments")',
-                    type: 'GET',
-                    data: { classId: classId, courseId: courseId },
-                    success: function (data) {
-                        populateStudentLists(data.unassigned, data.assigned);
-                        originalAssignedIds = data.assigned.map(s => s.id);
-
-                        // Set teacher dropdown
-                        if (data.teacherId) {
-                            $('#modalTeacherId').val(data.teacherId);
-                        } else {
-                            $('#modalTeacherId').val(0);
-                        }
-                    },
-                    error: function (err) {
-                        console.error("Error loading data:", err);
-                        $('#modal-error-alert').text('Error loading data. Please try again.').removeClass('d-none');
-                    }
-                });
-            }
-
-            function populateStudentLists(unassigned, assigned) {
-                const unassignedList = $('#unassigned-list');
-                const assignedList = $('#assigned-list');
-                unassignedList.empty();
-                assignedList.empty();
-
-                unassigned.forEach(student => {
-                    unassignedList.append(`<li class="list-group-item" data-id="${student.id}">${student.name}</li>`);
-                });
-                assigned.forEach(student => {
-                    assignedList.append(`<li class="list-group-item" data-id="${student.id}">${student.name}</li>`);
-                });
-            }
-
-            // --- Student Move Events ---
-            $(document).on('click', '#unassigned-list .list-group-item', function () {
-                $(this).appendTo('#assigned-list');
-            });
-
-            $(document).on('click', '#assigned-list .list-group-item', function () {
-                $(this).appendTo('#unassigned-list');
-            });
-
-            // --- Save Button Event ---
-            $('#save-assignments').on('click', function () {
-                const finalAssignedIds = $('#assigned-list .list-group-item').map((_, el) => $(el).data('id')).get();
-
-                const studentsToAdd = finalAssignedIds.filter(id => !originalAssignedIds.includes(id));
-                const studentsToRemove = originalAssignedIds.filter(id => !finalAssignedIds.includes(id));
-
-                const updateData = {
-                    classId: currentClassId,
-                    courseId: currentCourseId,
-                    teacherId: parseInt($('#modalTeacherId').val()),
-                    studentIdsToAdd: studentsToAdd,
-                    studentIdsToRemove: studentsToRemove
-                };
-
-                if (updateData.classId <= 0 || updateData.courseId <= 0) {
-                     $('#modal-error-alert').text('Please select a class and a course.').removeClass('d-none');
-                     return;
-                }
-
-                $.ajax({
-                    url: '@Url.Action("UpdateAssignments", "ClassAssignments")',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    headers: {
-                        'RequestVerificationToken': $('#anti-forgery-token').val()
-                    },
-                    data: JSON.stringify(updateData),
-                    success: function (response) {
-                        if (response.success) {
-                            $('#assignmentModal').modal('hide');
-                            // Show a more modern notification if possible, otherwise use alert.
-                            alert(response.message);
-                            location.reload(); // Reload to see changes
-                        } else {
-                            $('#modal-error-alert').text(response.message || 'An unknown error occurred.').removeClass('d-none');
-                        }
-                    },
-                    error: function (err) {
-                         $('#modal-error-alert').text('An error occurred while saving. Please try again.').removeClass('d-none');
-                         console.error("Save error:", err);
-                    }
-                });
-            });
-
-             // --- Modal Close Event ---
-            $('#assignmentModal').on('hidden.bs.modal', function () {
-                // Clean up everything to be safe
-                currentClassId = 0;
-                currentCourseId = 0;
-                originalAssignedIds = [];
-                $('#modalClassId, #modalCourseId').off('change'); // Remove event listener to prevent multiple triggers
-                $('#unassigned-list, #assigned-list').empty();
-                $('#modal-error-alert').addClass('d-none').text('');
-            });
-        });
+        }
     </script>
 }

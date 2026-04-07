@@ -1,0 +1,107 @@
+﻿@model SIMS.Models.Student.StudentAttendanceReportViewModel
+@{
+    ViewData["Title"] = "Báo cáo Điểm danh";
+}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Thống kê Điểm danh</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
+        <li class="breadcrumb-item active">Báo cáo Điểm danh</li>
+    </ol>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card shadow mb-4">
+                <div class="card-header bg-primary text-white fw-bold"><i class="fas fa-chart-pie me-1"></i> Biểu đồ Chuyên cần</div>
+                <div class="card-body">
+                    <canvas id="attendanceChart" width="100" height="100"></canvas>
+                    <div class="mt-4 text-center small">
+                        <span class="me-2"><i class="fas fa-circle text-success"></i> Có mặt (@Model.PresentCount)</span>
+                        <span class="me-2"><i class="fas fa-circle text-danger"></i> Vắng (@Model.AbsentCount)</span>
+                        <span class="me-2"><i class="fas fa-circle text-warning"></i> Trễ (@Model.LateCount)</span>
+                    </div>
+                    <hr />
+                    <div class="text-center fw-bold mt-3 @(Model.AttendanceRate < 80 ? "text-danger" : "text-success")">
+                        Tỷ lệ đi học: @Model.AttendanceRate.ToString("0.##")%
+                        @if (Model.AttendanceRate < 80)
+                        {
+                            <br />
+                            <small class="text-danger"><i class="fas fa-exclamation-triangle"></i> Cảnh báo rủi ro cấm thi!</small>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card shadow mb-4">
+                <div class="card-header bg-dark text-white fw-bold"><i class="fas fa-list me-1"></i> Lịch sử điểm danh chi tiết</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" id="datatablesSimple">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Ngày</th>
+                                    <th>Lớp</th>
+                                    <th>Môn</th>
+                                    <th>Giảng viên</th>
+                                    <th class="text-center">Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var record in Model.Records)
+                                {
+                                    <tr>
+                                        <td>@record.AttendanceDate.ToString("dd/MM/yyyy")</td>
+                                        <td class="fw-bold">@record.ClassName</td>
+                                        <td>@record.CourseName</td>
+                                        <td>@record.TeacherName</td>
+                                        <td class="text-center">
+                                            @if (record.Status == "Present")
+                                            {
+                                                <span class="badge bg-success">Có mặt</span>
+                                            }
+                                            else if (record.Status == "Absent")
+                                            {
+
+                                                <span class="badge bg-danger">Vắng</span>
+                                            }
+                                            else if (record.Status == "Late")
+                                            {
+
+                                                <span class="badge bg-warning text-dark">Đi trễ</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById("attendanceChart");
+        new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+        labels: ["Có mặt", "Vắng", "Đi trễ"],
+        datasets: [{
+        data: [@Model.PresentCount, @Model.AbsentCount, @Model.LateCount],
+        backgroundColor: ['#198754', '#dc3545', '#ffc107']
+        }],
+        },
+        options: {
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        cutout: '80%'
+        }
+        });
+    </script>
+}

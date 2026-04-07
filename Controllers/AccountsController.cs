@@ -52,6 +52,46 @@ namespace SIMS.Controllers
                 return View(model);
             }
 
+            // ==========================================
+            // BƯỚC 3: KIỂM TRA TRÙNG LẶP DỮ LIỆU
+            // ==========================================
+
+            // 1. Kiểm tra trùng Email
+            if (!string.IsNullOrWhiteSpace(model.Email))
+            {
+                var existingEmail = await _userManager.FindByEmailAsync(model.Email);
+                if (existingEmail != null)
+                {
+                    ModelState.AddModelError("Email", "Email này đã được sử dụng trong hệ thống.");
+                    return View(model);
+                }
+            }
+
+            // 2. Kiểm tra trùng ProfileId (Mã SV / Mã GV)
+            if (!string.IsNullOrWhiteSpace(model.ProfileId))
+            {
+                bool isProfileIdExist = await _context.Students.AnyAsync(s => s.StudentNumber == model.ProfileId) ||
+                                        await _context.Teachers.AnyAsync(t => t.TeacherNumber == model.ProfileId);
+                if (isProfileIdExist)
+                {
+                    ModelState.AddModelError("ProfileId", "Mã ID (Profile Id) này đã tồn tại.");
+                    return View(model);
+                }
+            }
+
+            // 3. Kiểm tra trùng Số điện thoại
+            if (!string.IsNullOrWhiteSpace(model.PhoneNumber))
+            {
+                bool isPhoneExist = await _context.Students.AnyAsync(s => s.PhoneNumber == model.PhoneNumber) ||
+                                    await _context.Teachers.AnyAsync(t => t.PhoneNumber == model.PhoneNumber);
+                if (isPhoneExist)
+                {
+                    ModelState.AddModelError("PhoneNumber", "Số điện thoại này đã được sử dụng cho một tài khoản khác.");
+                    return View(model);
+                }
+            }
+            // ==========================================
+
             var user = new ApplicationUser
             {
                 UserName = model.UserName,
@@ -62,6 +102,7 @@ namespace SIMS.Controllers
 
             if (result.Succeeded)
             {
+                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("MustChangePassword", "true"));
                 // Add role to user
                 if (!string.IsNullOrWhiteSpace(model.Role))
                 {

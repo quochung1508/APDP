@@ -28,31 +28,19 @@ namespace SIMS.Controllers
         public async Task<IActionResult> Index(string searchString)
         {
             var studentsQuery = _context.Students.Include(s => s.User).AsQueryable();
-
             if (!string.IsNullOrEmpty(searchString))
             {
-                studentsQuery = studentsQuery.Where(s =>
-                    s.FullName.Contains(searchString) ||
-                    s.StudentNumber.Contains(searchString) ||
-                    s.User.Email.Contains(searchString) ||
-                    s.PhoneNumber.Contains(searchString)
-                );
+                studentsQuery = studentsQuery.Where(s => s.FullName.Contains(searchString) || s.StudentNumber.Contains(searchString));
             }
-
             ViewData["CurrentFilter"] = searchString;
 
-            var students = await studentsQuery
-                .Select(s => new StudentListViewModel
-                {
-                    UserId = s.UserId,
-                    StudentNumber = s.StudentNumber,
-                    FullName = s.FullName,
-                    DateOfBirth = s.DateOfBirth,
-                    Gender = s.Gender,
-                    Address = s.Address,
-                    PhoneNumber = s.PhoneNumber
-                })
-                .ToListAsync();
+            var students = await studentsQuery.Select(s => new StudentListViewModel
+            {
+                UserId = s.UserId,
+                StudentNumber = s.StudentNumber,
+                FullName = s.FullName,
+                PhoneNumber = s.PhoneNumber
+            }).ToListAsync();
 
             return View(students);
         }
@@ -64,28 +52,23 @@ namespace SIMS.Controllers
             if (user == null) return Challenge();
 
             var student = await _context.Students.FirstOrDefaultAsync(s => s.UserId == user.Id);
-            if (student == null)
-            {
-                ViewData["ErrorMessage"] = "A student profile for your account could not be found.";
-                return View(new List<StudentScheduleViewModel>());
-            }
+            if (student == null) return View(new List<StudentScheduleViewModel>());
 
             ViewData["StudentName"] = student.FullName;
             ViewData["StudentNumber"] = student.StudentNumber;
 
             var schedule = await _context.ClassAssignments
-                .Where(ca => ca.StudentId == student.Id)
+                .Where(ca => ca.StudentId == student.Id && !string.IsNullOrEmpty(ca.Schedule))
                 .Include(ca => ca.Course)
                 .Include(ca => ca.Class)
-                .Include(ca => ca.Teacher).ThenInclude(t => t.User)
+                .Include(ca => ca.Teacher)
                 .Select(ca => new StudentScheduleViewModel
                 {
-                    CourseName = ca.Course.Name,
-                    ClassName = ca.Class.Name,
-                    Schedule = ca.Class.Schedule,
-                    TeacherName = ca.Teacher != null ? (ca.Teacher.FullName ?? ca.Teacher.User.UserName) : "Not Assigned"
-                })
-                .ToListAsync();
+                    CourseName = ca.Course != null ? ca.Course.Name : "Chưa rõ",
+                    ClassName = ca.Class != null ? ca.Class.Name : "Chưa rõ",
+                    Schedule = ca.Schedule,
+                    TeacherName = ca.Teacher != null ? ca.Teacher.FullName : "Chưa phân công" // TRÁNH LỖI NULL
+                }).ToListAsync();
 
             return View(schedule);
         }
@@ -97,28 +80,21 @@ namespace SIMS.Controllers
             if (user == null) return Challenge();
 
             var student = await _context.Students.FirstOrDefaultAsync(s => s.UserId == user.Id);
-            if (student == null)
-            {
-                TempData["ErrorMessage"] = "Student profile not found.";
-                return RedirectToAction("Index", "Home");
-            }
+            if (student == null) return RedirectToAction("Index", "Home");
 
             ViewData["StudentName"] = student.FullName;
 
             var records = await _context.Attendances
-                .Where(a => a.StudentId == student.Id)
-                .Include(a => a.Class)
-                .Include(a => a.Course)
-                .Include(a => a.Teacher)
+                .Where(a => a.StudentId == student.Id).Include(a => a.Class).Include(a => a.Course).Include(a => a.Teacher)
                 .OrderByDescending(a => a.AttendanceDate)
                 .Select(a => new StudentAttendanceReportViewModel.AttendanceRecord
                 {
                     AttendanceDate = a.AttendanceDate,
-                    ClassName = a.Class.Name,
-                    CourseName = a.Course.Name,
+                    ClassName = a.Class != null ? a.Class.Name : "Chưa rõ",
+                    CourseName = a.Course != null ? a.Course.Name : "Chưa rõ",
                     Status = a.Status,
                     Remarks = a.Remarks,
-                    TeacherName = a.Teacher.FullName
+                    TeacherName = a.Teacher != null ? a.Teacher.FullName : "Chưa phân công"
                 }).ToListAsync();
 
             var report = new StudentAttendanceReportViewModel
@@ -132,6 +108,33 @@ namespace SIMS.Controllers
             };
 
             return View(report);
+        }
+
+        [Authorize(Roles = "Student")]
+        public async Task<IActionResult> ExportScheduleCsv()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var student = await _context.Students.FirstOrDefaultAsync(s => s.UserId == user.Id);
+
+            var schedule = await _context.ClassAssignments
+                .Where(ca => ca.StudentId == student.Id && !string.IsNullOrEmpty(ca.Schedule))
+                .Include(ca => ca.Course).Include(ca => ca.Class).Include(ca => ca.Teacher)
+                .Select(ca => new {
+                    CourseName = ca.Course != null ? ca.Course.Name : "Chưa rõ",
+                    ClassName = ca.Class != null ? ca.Class.Name : "Chưa rõ",
+                    Schedule = ca.Schedule,
+                    TeacherName = ca.Teacher != null ? ca.Teacher.FullName : "Chưa phân công"
+                }).ToListAsync();
+
+            var builder = new System.Text.StringBuilder();
+            builder.Append('\uFEFF');
+            builder.AppendLine("Môn học (Course),Lớp (Class),Giảng viên (Teacher),Lịch học (Schedule)");
+
+            foreach (var item in schedule.OrderBy(i => i.CourseName))
+            {
+                builder.AppendLine($"\"{item.CourseName}\",\"{item.ClassName}\",\"{item.TeacherName}\",\"{item.Schedule}\"");
+            }
+            return File(System.Text.Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", $"LichHoc_{student.StudentNumber}.csv");
         }
     }
 }

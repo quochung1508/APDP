@@ -67,9 +67,15 @@ namespace SIMS.Controllers
                 .OrderBy(ca => ca.Student.FullName)
                 .ToListAsync();
 
+            // 1. Lấy bản ghi điểm danh của CỤ THỂ NGÀY HÔM NAY để hiển thị trạng thái cũ
             var existingAttendances = await _context.Attendances
                 .Where(a => a.ClassId == classId && a.CourseId == courseId && a.AttendanceDate.Date == date.Date)
                 .ToDictionaryAsync(a => a.StudentId);
+
+            // 2. LẤY TẤT CẢ BẢN GHI VẮNG MẶT TỪ TRƯỚC TỚI NAY CỦA LỚP/MÔN NÀY ĐỂ ĐẾM
+            var allAbsences = await _context.Attendances
+                .Where(a => a.ClassId == classId && a.CourseId == courseId && a.Status == "Absent")
+                .ToListAsync();
 
             var viewModel = new TakeAttendanceViewModel
             {
@@ -86,13 +92,17 @@ namespace SIMS.Controllers
                 {
                     existingAttendances.TryGetValue(assignment.StudentId.Value, out var existingRecord);
 
+                    // Đếm tổng số lần vắng mặt của sinh viên này
+                    int absencesCount = allAbsences.Count(a => a.StudentId == assignment.StudentId.Value);
+
                     viewModel.Students.Add(new StudentAttendanceViewModel
                     {
                         StudentId = assignment.StudentId.Value,
                         StudentName = assignment.Student.FullName,
                         StudentNumber = assignment.Student.StudentNumber,
                         Status = existingRecord?.Status ?? "Present",
-                        Remarks = existingRecord?.Remarks
+                        Remarks = existingRecord?.Remarks,
+                        TotalAbsences = absencesCount // Gán số buổi vắng vào đây
                     });
                 }
             }

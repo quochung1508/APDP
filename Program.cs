@@ -38,6 +38,16 @@ namespace SIMS
                 .AddEntityFrameworkStores<SimDbContext>() // Đã sửa lại
                 .AddDefaultTokenProviders()
                 .AddRoleManager<RoleManager<IdentityRole<long>>>();
+            
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                // Báo cho hệ thống biết trang Login nằm ở đâu
+                options.LoginPath = "/Login/Index";
+
+                // Báo cho hệ thống biết trang Từ chối truy cập nằm ở đâu
+                // (Dựa vào file Views/Auth/AccessDenied.cshtml của bạn)
+                options.AccessDeniedPath = "/Auth/AccessDenied";
+            });
 
             // 3. Đăng ký Services tùy chỉnh
             builder.Services.AddScoped<IAccountService, AccountService>();
@@ -45,12 +55,15 @@ namespace SIMS
             // 4. Thêm MVC
             builder.Services.AddControllersWithViews();
 
-            // 5. Cấu hình Cookie
+            // 5. Cấu hình Cookie (Đã xoá phần khai báo trùng lặp)
             builder.Services.AddHttpContextAccessor();
             builder.Services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = "/Login";
-                options.AccessDeniedPath = "/Auth/AccessDenied";
+                options.LoginPath = "/Login/Index";
+
+                // MẸO: Trỏ tạm về trang Home nếu bạn chưa tạo trang AccessDenied 
+                // để tránh lỗi 404 nếu sau này có lỡ truy cập sai quyền
+                options.AccessDeniedPath = "/Home/Index";
             });
 
             // 6. Cấu hình Authorization
@@ -58,7 +71,9 @@ namespace SIMS
             {
                 options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
                 options.AddPolicy("StudentOnly", policy => policy.RequireRole("Student"));
-                options.AddPolicy("FacultyOnly", policy => policy.RequireRole("Faculty"));
+
+                // ĐÃ SỬA: Đổi FacultyOnly thành TeacherOnly và dùng role "Teacher"
+                options.AddPolicy("TeacherOnly", policy => policy.RequireRole("Teacher"));
             });
 
             // ==========================================================

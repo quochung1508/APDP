@@ -1,0 +1,85 @@
+﻿@model SIMS.Models.Attendance.TakeAttendanceViewModel
+@{
+    ViewData["Title"] = "Điểm danh chi tiết";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-success text-white d-flex justify-content-between align-items-center">
+        <h5 class="m-0 font-weight-bold">
+            <i class="fas fa-user-check me-2"></i>Điểm danh: @Model.ClassName - @Model.CourseName
+        </h5>
+        <span class="badge bg-light text-dark fs-6">Ngày: @Model.AttendanceDate.ToString("dd/MM/yyyy")</span>
+    </div>
+    
+    <form asp-action="Submit" method="post">
+        <input type="hidden" asp-for="ClassId" />
+        <input type="hidden" asp-for="CourseId" />
+        <input type="hidden" asp-for="AttendanceDate" />
+        
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="ps-3">MSSV</th>
+                            <th>Họ Tên</th>
+                            <th class="text-center">Cảnh báo (Số buổi vắng)</th>
+                            <th class="text-center">Trạng Thái (Status)</th>
+                            <th>Ghi chú (Remarks)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Students.Count; i++)
+                        {
+                            <tr>
+                                <td class="ps-3 fw-bold align-middle">
+                                    <input type="hidden" asp-for="Students[i].StudentId" />
+                                    @Model.Students[i].StudentNumber
+                                </td>
+                                <td class="align-middle">@Model.Students[i].StudentName</td>
+                                
+                                <td class="align-middle text-center">
+                                    @if (Model.Students[i].TotalAbsences >= 3)
+                                    {
+                                        <span class="badge bg-danger p-2"><i class="fas fa-exclamation-triangle me-1"></i> Đã vắng @Model.Students[i].TotalAbsences buổi</span>
+                                    }
+                                    else if (Model.Students[i].TotalAbsences > 0)
+                                    {
+                                        <span class="badge bg-warning text-dark p-2">Đã vắng @Model.Students[i].TotalAbsences buổi</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success p-2">Chuyên cần</span>
+                                    }
+                                    <input type="hidden" asp-for="Students[i].TotalAbsences" />
+                                </td>
+
+                                <td class="text-center align-middle" style="min-width: 250px;">
+                                    <div class="btn-group" role="group">
+                                        <input type="radio" class="btn-check" asp-for="Students[i].Status" value="Present" id="present_@i" required>
+                                            <label class="btn btn-outline-success" for="present_@i">Có mặt</label>
+
+                                            <input type="radio" class="btn-check" asp-for="Students[i].Status" value="Absent" id="absent_@i">
+                                                <label class="btn btn-outline-danger" for="absent_@i">Vắng</label>
+
+                                                <input type="radio" class="btn-check" asp-for="Students[i].Status" value="Late" id="late_@i">
+                                                    <label class="btn btn-outline-warning" for="late_@i">Đi trễ</label>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <input type="text" asp-for="Students[i].Remarks" class="form-control form-control-sm" placeholder="Lý do..." />
+                                                <input type="hidden" asp-for="Students[i].StudentName" />
+                                                <input type="hidden" asp-for="Students[i].StudentNumber" />
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light text-end">
+                        <a asp-action="Index" class="btn btn-secondary me-2">Trở về</a>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-1"></i> Lưu Điểm Danh</button>
+                    </div>
+                </form>
+            </div>

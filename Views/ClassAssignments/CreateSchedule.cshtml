@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Lên Thời Khóa Biểu";
+}
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+        <form asp-action="CreateSchedule" method="post" class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-calendar-plus me-2"></i>Phân công Giảng dạy & Thời khóa biểu</h5>
+            </div>
+            <div class="card-body p-4">
+                <div class="alert alert-info small">
+                    <i class="fas fa-info-circle"></i> Khi lưu, hệ thống sẽ <strong>tự động đăng ký môn học này</strong> cho toàn bộ sinh viên đang có trong Lớp Hành Chính.
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-bold">1. Chọn Lớp Hành Chính</label>
+                    <select name="ClassId" class="form-select" required>
+                        <option value="">-- Chọn lớp --</option>
+                        @if (ViewBag.Classes != null)
+                        {
+                            foreach (var c in ViewBag.Classes)
+                            {
+                                <option value="@c.Id">@c.Name (@c.Cohort)</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-bold">2. Chọn Khóa Học / Môn Học</label>
+                    <select name="CourseId" class="form-select" required>
+                        <option value="">-- Chọn môn --</option>
+                        @if (ViewBag.Courses != null)
+                        {
+                            foreach (var c in ViewBag.Courses)
+                            {
+                                <option value="@c.Id">@c.Name (Thời lượng: @c.Duration)</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-bold">3. Chọn Giảng Viên</label>
+                    <select name="TeacherId" class="form-select" required>
+                        <option value="">-- Chọn giảng viên --</option>
+                        @if (ViewBag.Teachers != null)
+                        {
+                            foreach (var t in ViewBag.Teachers)
+                            {
+                                <option value="@t.Id">@t.FullName</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-bold">4. Chọn Lịch Học (Thời khóa biểu)</label>
+                    <select name="Schedule" class="form-select" size="6" required>
+                        <option disabled class="fw-bold bg-light text-dark">--- Thứ 2, Thứ 4, Thứ 6 ---</option>
+                        <option value="T2-T4-T6 (Ca 1: 07:30 - 09:30)">T2-T4-T6 (Ca 1: 07:30 - 09:30)</option>
+                        <option value="T2-T4-T6 (Ca 2: 09:30 - 11:30)">T2-T4-T6 (Ca 2: 09:30 - 11:30)</option>
+                        <option value="T2-T4-T6 (Ca 3: 13:00 - 15:00)">T2-T4-T6 (Ca 3: 13:00 - 15:00)</option>
+                        <option disabled class="fw-bold bg-light text-dark mt-2">--- Thứ 3, Thứ 5, Thứ 7 ---</option>
+                        <option value="T3-T5-T7 (Ca 1: 07:30 - 09:30)">T3-T5-T7 (Ca 1: 07:30 - 09:30)</option>
+                        <option value="T3-T5-T7 (Ca 2: 09:30 - 11:30)">T3-T5-T7 (Ca 2: 09:30 - 11:30)</option>
+                        <option value="T3-T5-T7 (Ca 3: 13:00 - 15:00)">T3-T5-T7 (Ca 3: 13:00 - 15:00)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card-footer bg-light text-end">
+                <a asp-action="Manage" class="btn btn-secondary me-2">Hủy</a>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save me-1"></i> Lưu & Áp dụng lịch học</button>
+            </div>
+        </form>
+    </div>
+</div>
