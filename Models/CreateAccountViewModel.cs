@@ -1,7 +1,6 @@
-﻿// File: Models/CreateAccountViewModel.cs
-
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using SIMS.Validations;
 
 namespace SIMS.Models
 {
@@ -23,7 +22,6 @@ namespace SIMS.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        // Add back the new fields from ApplicationUser (will not be saved to DB due to [NotMapped])
         [Display(Name = "Profile Id")]
         public string? ProfileId { get; set; }
 
@@ -32,6 +30,7 @@ namespace SIMS.Models
 
         [DataType(DataType.Date)]
         [Display(Name = "Date of Birth")]
+        [MinimumAge(18)]
         public DateTime? DateOfBirth { get; set; }
 
         [Display(Name = "Gender")]
@@ -41,7 +40,8 @@ namespace SIMS.Models
         public string? Address { get; set; }
 
         [Display(Name = "Phone Number")]
-        [Phone(ErrorMessage = "Invalid Phone Number")]
-        public string? PhoneNumber { get; set; }
+        [Required(ErrorMessage = "Số điện thoại không được để trống.")]
+        [RegularExpression(@"^0\d{9}$", ErrorMessage = "Số điện thoại phải bắt đầu bằng số 0 và có đúng 10 chữ số.")]
+        public string PhoneNumber { get; set; }
     }
 }

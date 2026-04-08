@@ -1,0 +1,47 @@
+﻿@model SIMS.Models.Attendance.AttendanceIndexViewModel
+@{
+    ViewData["Title"] = "Quản lý Điểm danh";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-primary text-white">
+        <h5 class="m-0 font-weight-bold"><i class="fas fa-clipboard-list me-2"></i>Chọn Lớp Để Điểm Danh</h5>
+    </div>
+    <div class="card-body">
+        @if (!Model.AssignedClasses.Any())
+        {
+            <div class="alert alert-info">Bạn chưa được phân công giảng dạy lớp nào.</div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Lớp Học (Class)</th>
+                            <th>Môn Học (Course)</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.AssignedClasses)
+                        {
+                            <tr>
+                                <td class="fw-bold align-middle">@item.ClassName</td>
+                                <td class="align-middle">@item.CourseName</td>
+                                <td style="width: 350px;">
+                                    <form asp-action="Take" method="get" class="d-flex">
+                                        <input type="hidden" name="classId" value="@item.ClassId" />
+                                        <input type="hidden" name="courseId" value="@item.CourseId" />
+                                        <input type="date" name="attendanceDate" class="form-control me-2" value="@DateTime.Today.ToString("yyyy-MM-dd")" required />
+                                        <button type="submit" class="btn btn-success text-nowrap"><i class="fas fa-check-square me-1"></i> Điểm danh</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

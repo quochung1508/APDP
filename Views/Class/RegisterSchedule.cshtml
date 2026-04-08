@@ -1,0 +1,46 @@
+﻿@model SIMS.DatabaseContext.Entities.Class
+
+@{
+    ViewData["Title"] = "Đăng Ký Lịch Học";
+}
+
+<h1>Đăng Ký Lịch Học</h1>
+<h4>Lớp: <span class="text-primary">@Model.Name</span></h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="RegisterSchedule" method="post">
+            <input type="hidden" name="id" value="@Model.Id" />
+            
+            <div class="form-group mb-3">
+                <label class="control-label fw-bold">Chọn Lịch Học (Schedule)</label>
+                
+                <select name="Schedule" class="form-select" size="6" required>
+                    <option disabled class="fw-bold bg-light text-dark">--- Lịch Thứ 2, Thứ 4, Thứ 6 ---</option>
+                    <option value="T2-T4-T6 (Ca 1: 07:30 - 09:30)">T2-T4-T6 (Ca 1: 07:30 - 09:30)</option>
+                    <option value="T2-T4-T6 (Ca 2: 09:30 - 11:30)">T2-T4-T6 (Ca 2: 09:30 - 11:30)</option>
+                    <option value="T2-T4-T6 (Ca 3: 13:00 - 15:00)">T2-T4-T6 (Ca 3: 13:00 - 15:00)</option>
+                    
+                    <option disabled class="fw-bold bg-light text-dark mt-2">--- Lịch Thứ 3, Thứ 5, Thứ 7 ---</option>
+                    <option value="T3-T5-T7 (Ca 1: 07:30 - 09:30)">T3-T5-T7 (Ca 1: 07:30 - 09:30)</option>
+                    <option value="T3-T5-T7 (Ca 2: 09:30 - 11:30)">T3-T5-T7 (Ca 2: 09:30 - 11:30)</option>
+                    <option value="T3-T5-T7 (Ca 3: 13:00 - 15:00)">T3-T5-T7 (Ca 3: 13:00 - 15:00)</option>
+                </select>
+                
+                <small class="text-muted mt-1 d-block">Click vào một ca học để chọn.</small>
+                @Html.ValidationMessage("Schedule", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group mt-4">
+                <input type="submit" value="Lưu Lịch Học" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-secondary ms-2">Trở về</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

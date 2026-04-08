@@ -1,49 +1,33 @@
 ﻿@model SIMS.DatabaseContext.Entities.Class
-
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["title"] = "Edit Classroom";
-    ViewData["breadcrumb"] = "Classroom";
-    ViewData["breadcrumb_item"] = "Edit";
+    ViewData["Title"] = "Sửa Lớp Học";
 }
 
-<div class="row justify-content-center">
-    <div class="col-lg-8">
-        <div class="card shadow-sm">
-            <div class="card-header bg-light py-3">
-                <h5 class="mb-0"><i class="fas fa-edit me-2"></i>Edit Class: @Model.Name</h5>
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <form asp-action="Edit" class="card p-4 shadow-sm">
+            <h4 class="mb-3 text-warning"><i class="fas fa-edit"></i> Sửa Thông Tin Lớp</h4>
+            <input type="hidden" asp-for="Id" />
+            
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="control-label fw-bold">Tên Lớp</label>
+                <input asp-for="Name" class="form-control" required />
             </div>
-            <form asp-action="Edit">
-                <div class="card-body">
-                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-                    <input type="hidden" asp-for="Id" />
 
-                    <div class="mb-3">
-                        <label asp-for="Name" class="form-label">Class name</label>
-                        <input asp-for="Name" class="form-control" placeholder="For example: Class 10A1, IT specialized class...">
-                        <span asp-validation-for="Name" class="text-danger small mt-1"></span>
-                    </div>
+            <div class="form-group mb-4">
+                <label asp-for="Cohort" class="control-label fw-bold">Khóa Học (Cohort)</label>
+                <select asp-for="Cohort" class="form-select" required>
+                    <option value="Khóa 17">Khóa 17</option>
+                    <option value="Khóa 18">Khóa 18</option>
+                    <option value="Khóa 19">Khóa 19</option>
+                    <option value="Khóa 20">Khóa 20</option>
+                </select>
+            </div>
 
-                    <div class="mb-3">
-                        <label asp-for="Schedule" class="form-label">Class schedule</label>
-                        <textarea asp-for="Schedule" class="form-control" rows="3" placeholder="Describe the class schedule, for example: Monday, Wednesday, Friday mornings from 7:30 to 11:00"></textarea>
-                        <span asp-validation-for="Schedule" class="text-danger small mt-1"></span>
-                    </div>
-                </div>
-                <div class="card-footer bg-light text-end">
-                    <a asp-action="Index" class="btn btn-secondary me-2">
-                        <i class="fas fa-arrow-left me-2"></i>Back
-                    </a>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save me-2"></i>Save changes
-                </div>
-            </form>
-        </div>
+            <div class="form-group text-end">
+                <a asp-action="Index" class="btn btn-secondary me-2">Hủy</a>
+                <button type="submit" class="btn btn-warning text-dark fw-bold">Lưu thay đổi</button>
+            </div>
+        </form>
     </div>
 </div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

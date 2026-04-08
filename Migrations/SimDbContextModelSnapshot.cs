@@ -49,33 +49,7 @@ namespace SIMS.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("aspnetroles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            Name = "Teacher",
-                            NormalizedName = "TEACHER"
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            Name = "Student",
-                            NormalizedName = "STUDENT"
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            Name = "User",
-                            NormalizedName = "USER"
-                        });
+                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<long>", b =>
@@ -99,7 +73,7 @@ namespace SIMS.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("aspnetroleclaims", (string)null);
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<long>", b =>
@@ -123,7 +97,7 @@ namespace SIMS.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("aspnetuserclaims", (string)null);
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<long>", b =>
@@ -144,7 +118,7 @@ namespace SIMS.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("aspnetuserlogins", (string)null);
+                    b.ToTable("AspNetUserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<long>", b =>
@@ -159,59 +133,7 @@ namespace SIMS.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("aspnetuserroles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 2L,
-                            RoleId = 2L
-                        },
-                        new
-                        {
-                            UserId = 5L,
-                            RoleId = 3L
-                        },
-                        new
-                        {
-                            UserId = 6L,
-                            RoleId = 3L
-                        },
-                        new
-                        {
-                            UserId = 9L,
-                            RoleId = 3L
-                        },
-                        new
-                        {
-                            UserId = 12L,
-                            RoleId = 1L
-                        },
-                        new
-                        {
-                            UserId = 16L,
-                            RoleId = 1L
-                        },
-                        new
-                        {
-                            UserId = 17L,
-                            RoleId = 4L
-                        },
-                        new
-                        {
-                            UserId = 18L,
-                            RoleId = 4L
-                        },
-                        new
-                        {
-                            UserId = 19L,
-                            RoleId = 4L
-                        },
-                        new
-                        {
-                            UserId = 20L,
-                            RoleId = 4L
-                        });
+                    b.ToTable("AspNetUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<long>", b =>
@@ -230,7 +152,7 @@ namespace SIMS.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("aspnetusertokens", (string)null);
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("SIMS.DatabaseContext.Entities.ApplicationUser", b =>
@@ -298,244 +220,241 @@ namespace SIMS.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("aspnetusers", (string)null);
+                    b.ToTable("AspNetUsers", (string)null);
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 2L,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "1f20f25a-baf3-459e-a596-9c161caaa33c",
-                            Email = "t1@mail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "T1@MAIL.COM",
-                            NormalizedUserName = "TEACHER1",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAkcR5/UfOiMP3Zt5FIu+C2qfhPnJinFDx9h50baXnEq2yDMmaxI4y2FkekJIErocQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "db5d9651-83f8-4c05-bcd7-87bb4ed261be",
-                            TwoFactorEnabled = false,
-                            UserName = "teacher1"
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "f8291f5d-ded7-416e-9c53-445c0557735e",
-                            Email = "s1@mail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "S1@MAIL.COM",
-                            NormalizedUserName = "STUDENT1",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAkcR5/UfOiMP3Zt5FIu+C2qfhPnJinFDx9h50baXnEq2yDMmaxI4y2FkekJIErocQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "3e25fb21-b55c-4f0a-b738-15a8ea0a337a",
-                            TwoFactorEnabled = false,
-                            UserName = "student1"
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "7737efd8-3a21-4013-afec-3b24a0e908f2",
-                            Email = "s2@mail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "S2@MAIL.COM",
-                            NormalizedUserName = "STUDENT2",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAkcR5/UfOiMP3Zt5FIu+C2qfhPnJinFDx9h50baXnEq2yDMmaxI4y2FkekJIErocQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "be3f6a2d-96cc-4016-9acd-ec4a2778a36d",
-                            TwoFactorEnabled = false,
-                            UserName = "student2"
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "aaa62926-e652-474b-804a-953d232f2b1e",
-                            Email = "s5@mail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "S5@MAIL.COM",
-                            NormalizedUserName = "STUDENT5",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAkcR5/UfOiMP3Zt5FIu+C2qfhPnJinFDx9h50baXnEq2yDMmaxI4y2FkekJIErocQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "4902137b-704b-42b8-a731-0d7966465886",
-                            TwoFactorEnabled = false,
-                            UserName = "student5"
-                        },
-                        new
-                        {
-                            Id = 12L,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "bf929322-8635-4901-83ff-c2c3411f0a07",
-                            Email = "sysadmin@example.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "SYSADMIN@EXAMPLE.COM",
-                            NormalizedUserName = "SYSADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAkcR5/UfOiMP3Zt5FIu+C2qfhPnJinFDx9h50baXnEq2yDMmaxI4y2FkekJIErocQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "91bdeddf-9518-44e0-9a3a-26add81ba47b",
-                            TwoFactorEnabled = false,
-                            UserName = "sysadmin"
-                        },
-                        new
-                        {
-                            Id = 16L,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "9e92648a-1145-4eae-bd99-140d50252534",
-                            Email = "admin@example.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@EXAMPLE.COM",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAkcR5/UfOiMP3Zt5FIu+C2qfhPnJinFDx9h50baXnEq2yDMmaxI4y2FkekJIErocQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "17b0f00a-647d-47ed-975b-f743e4f365d0",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        },
-                        new
-                        {
-                            Id = 17L,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "4938aa81-5b3d-4916-941c-6970c8d29bc0",
-                            Email = "dotrang2004mc@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "DOTRANG2004MC@GMAIL.COM",
-                            NormalizedUserName = "ABC",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAkcR5/UfOiMP3Zt5FIu+C2qfhPnJinFDx9h50baXnEq2yDMmaxI4y2FkekJIErocQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "476c3a2b-7831-45a1-b6b6-73781dce6013",
-                            TwoFactorEnabled = false,
-                            UserName = "abc"
-                        },
-                        new
-                        {
-                            Id = 18L,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "a1d016fc-4d53-4c80-94b5-0c550f4c1527",
-                            Email = "ducd53776@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "DUCD53776@GMAIL.COM",
-                            NormalizedUserName = "DUCDM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAkcR5/UfOiMP3Zt5FIu+C2qfhPnJinFDx9h50baXnEq2yDMmaxI4y2FkekJIErocQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "9503ffc3-8df5-4e24-808d-9c6ba3802000",
-                            TwoFactorEnabled = false,
-                            UserName = "ducdm"
-                        },
-                        new
-                        {
-                            Id = 19L,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "7f2c7595-871b-44c9-9657-7298d34bcccc",
-                            Email = "mu@gamil.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "MU@GAMIL.COM",
-                            NormalizedUserName = "DOAN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAkcR5/UfOiMP3Zt5FIu+C2qfhPnJinFDx9h50baXnEq2yDMmaxI4y2FkekJIErocQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "41667a3d-8738-4434-ae0f-6669bfcaa1e0",
-                            TwoFactorEnabled = false,
-                            UserName = "doan"
-                        },
-                        new
-                        {
-                            Id = 20L,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "f7f06751-9283-4bac-96d8-299cfb7ecdd4",
-                            Email = "duc6@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "DUC6@GMAIL.COM",
-                            NormalizedUserName = "DOANMINHDUC",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAkcR5/UfOiMP3Zt5FIu+C2qfhPnJinFDx9h50baXnEq2yDMmaxI4y2FkekJIErocQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "47afb4fc-cc99-4770-b720-cd69c441cb57",
-                            TwoFactorEnabled = false,
-                            UserName = "doanminhduc"
-                        });
+            modelBuilder.Entity("SIMS.DatabaseContext.Entities.Attendance", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("AttendanceDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("attendance_date");
+
+                    b.Property<long>("ClassId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("class_id");
+
+                    b.Property<long>("CourseId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("course_id");
+
+                    b.Property<string>("Remarks")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("remarks");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("status");
+
+                    b.Property<long>("StudentId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("student_id");
+
+                    b.Property<long>("TeacherId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("teacher_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("attendance");
+                });
+
+            modelBuilder.Entity("SIMS.DatabaseContext.Entities.Class", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Cohort")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Classes");
+                });
+
+            modelBuilder.Entity("SIMS.DatabaseContext.Entities.ClassAssignment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long?>("ClassId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("ClassId1")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CourseId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Schedule")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("StudentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("TeacherId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
+
+                    b.HasIndex("ClassId1");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("ClassAssignments");
+                });
+
+            modelBuilder.Entity("SIMS.DatabaseContext.Entities.Course", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Duration")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Major")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("SIMS.DatabaseContext.Entities.Student", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("address");
 
                     b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("date_of_birth");
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("full_name");
 
                     b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("gender");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("phone_number");
 
                     b.Property<string>("StudentNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("student_number");
 
                     b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
-                    b.ToTable("students", (string)null);
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("students");
                 });
 
             modelBuilder.Entity("SIMS.DatabaseContext.Entities.Teacher", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("Department")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("address");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("DateOfBirth")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("date_of_birth");
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("full_name");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("gender");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("phone_number");
 
-                    b.Property<string>("StaffNumber")
+                    b.Property<string>("TeacherNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("teacher_number");
 
                     b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
-                    b.ToTable("teachers", (string)null);
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("teachers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<long>", b =>
@@ -587,6 +506,112 @@ namespace SIMS.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SIMS.DatabaseContext.Entities.Attendance", b =>
+                {
+                    b.HasOne("SIMS.DatabaseContext.Entities.Class", "Class")
+                        .WithMany()
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SIMS.DatabaseContext.Entities.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SIMS.DatabaseContext.Entities.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SIMS.DatabaseContext.Entities.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("SIMS.DatabaseContext.Entities.ClassAssignment", b =>
+                {
+                    b.HasOne("SIMS.DatabaseContext.Entities.Class", "Class")
+                        .WithMany()
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SIMS.DatabaseContext.Entities.Class", null)
+                        .WithMany("ClassAssignments")
+                        .HasForeignKey("ClassId1");
+
+                    b.HasOne("SIMS.DatabaseContext.Entities.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SIMS.DatabaseContext.Entities.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SIMS.DatabaseContext.Entities.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Class");
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("SIMS.DatabaseContext.Entities.Student", b =>
+                {
+                    b.HasOne("SIMS.DatabaseContext.Entities.ApplicationUser", "User")
+                        .WithOne("Student")
+                        .HasForeignKey("SIMS.DatabaseContext.Entities.Student", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SIMS.DatabaseContext.Entities.Teacher", b =>
+                {
+                    b.HasOne("SIMS.DatabaseContext.Entities.ApplicationUser", "User")
+                        .WithOne("Teacher")
+                        .HasForeignKey("SIMS.DatabaseContext.Entities.Teacher", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SIMS.DatabaseContext.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("Student")
+                        .IsRequired();
+
+                    b.Navigation("Teacher")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SIMS.DatabaseContext.Entities.Class", b =>
+                {
+                    b.Navigation("ClassAssignments");
                 });
 #pragma warning restore 612, 618
         }

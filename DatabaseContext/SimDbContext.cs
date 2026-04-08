@@ -38,50 +38,74 @@ namespace SIMS.DatabaseContext
                 .HasOne(ca => ca.Student)
                 .WithMany()
                 .HasForeignKey(ca => ca.StudentId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<ClassAssignment>()
                 .HasOne(ca => ca.Teacher)
                 .WithMany()
                 .HasForeignKey(ca => ca.TeacherId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<ClassAssignment>()
                 .HasOne(ca => ca.Class)
                 .WithMany()
                 .HasForeignKey(ca => ca.ClassId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<ClassAssignment>()
                 .HasOne(ca => ca.Course)
                 .WithMany()
                 .HasForeignKey(ca => ca.CourseId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Attendance Deletion Rules (following the same cascade pattern)
             builder.Entity<Attendance>()
                 .HasOne(a => a.Student)
                 .WithMany()
                 .HasForeignKey(a => a.StudentId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Attendance>()
                 .HasOne(a => a.Teacher)
                 .WithMany()
                 .HasForeignKey(a => a.TeacherId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Attendance>()
                 .HasOne(a => a.Class)
                 .WithMany()
                 .HasForeignKey(a => a.ClassId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Attendance>()
                 .HasOne(a => a.Course)
                 .WithMany()
                 .HasForeignKey(a => a.CourseId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
+            // Cấu hình vô hiệu hóa Cascade Delete cho bảng Attendance để tránh lỗi Multiple Cascade Paths
+            builder.Entity<Attendance>()
+                .HasOne(a => a.Class)
+                .WithMany()
+                .HasForeignKey(a => a.ClassId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Attendance>()
+                .HasOne(a => a.Course)
+                .WithMany()
+                .HasForeignKey(a => a.CourseId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Attendance>()
+                .HasOne(a => a.Teacher)
+                .WithMany()
+                .HasForeignKey(a => a.TeacherId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Attendance>()
+                .HasOne(a => a.Student)
+                .WithMany()
+                .HasForeignKey(a => a.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

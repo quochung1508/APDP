@@ -1,44 +1,58 @@
-﻿@model SIMS.DatabaseContext.Entities.Class
-
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["title"] = "Create New Class";
-    ViewData["breadcrumb"] = "Class";
-    ViewData["breadcrumb_item"] = "Create New";
+﻿@{
+    ViewData["Title"] = "Tạo Lớp Học";
 }
 
-<div class="row justify-content-center">
-    <div class="col-lg-8">
-        <div class="card shadow-sm">
-            <div class="card-header bg-light py-3">
-                <h5 class="mb-0"><i class="fas fa-plus-circle me-2"></i>Create New Class</h5>
+<h1>Tạo Lớp Học Mới</h1>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group mb-3">
+                <label class="control-label fw-bold">Tên Lớp (Class Name)</label>
+                <input name="Name" class="form-control" required placeholder="Ví dụ: SE1601" />
+                @Html.ValidationMessage("Name", new { @class = "text-danger" })
             </div>
-            <form asp-action="Create">
-                <div class="card-body">
-                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-                    <div class="mb-3">
-                        <label asp-for="Name" class="form-label">Class name</label>
-                        <input asp-for="Name" class="form-control" placeholder="For example: Class 10A1, IT specialized class...">
-                        <span asp-validation-for="Name" class="text-danger small mt-1"></span>
-                    </div>
+            <div class="form-group mb-3">
+                <label class="control-label fw-bold">Thêm Học Sinh Vào Lớp</label>
+                
+                <div class="border rounded p-3 shadow-sm" style="max-height: 250px; overflow-y: auto; background-color: #fcfcfc;">
+                    @if (ViewBag.Students != null)
+                    {
+                        foreach (var student in ViewBag.Students)
+                        {
+                            <div class="form-check mb-2 pb-2 border-bottom">
+                                <input class="form-check-input" type="checkbox" name="SelectedStudentIds" value="@student.Id" id="student_@student.Id" style="cursor: pointer; transform: scale(1.2);">
+                                <label class="form-check-label ms-2 w-100" for="student_@student.Id" style="cursor: pointer;">
+                                    @student.DisplayText
+                                </label>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <span class="text-muted">Chưa có học sinh nào trong hệ thống.</span>
+                    }
+                </div>
+                <small class="text-muted mt-2 d-block">Tích (✓) vào ô vuông bên cạnh tên để thêm học sinh vào lớp. Bạn có thể cuộn chuột để xem thêm.</small>
+                <div class="form-group mb-3">
+                    <label class="control-label fw-bold">Khóa Học (Cohort)</label>
+                    <select name="Cohort" class="form-select" required>
+                        <option value="">-- Chọn khóa --</option>
+                        <option value="Khóa 17">Khóa 17</option>
+                        <option value="Khóa 18">Khóa 18</option>
+                        <option value="Khóa 19">Khóa 19</option>
+                    </select>
+                </div>
+            </div>
 
-                    <div class="mb-3">
-                        <label asp-for="Schedule" class="form-label">Class schedule</label>
-                        <textarea asp-for="Schedule" class="form-control" rows="3" placeholder="Describe the class schedule, for example: Monday, Wednesday, Friday mornings from 7:30 to 11:00"></textarea>
-                        <span asp-validation-for="Schedule" class="text-danger small mt-1"></span>
-                    </div>
-                </div>
-                <div class="card-footer bg-light text-end">
-                    <a asp-action="Index" class="btn btn-secondary me-2">
-                        <i class="fas fa-arrow-left me-2"></i>Back
-                    </a>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save me-2"></i>Save
-                    </button>
-                </div>
-            </form>
-        </div>
+            <div class="form-group mt-4">
+                <input type="submit" value="Tạo Lớp" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary ms-2">Trở về</a>
+            </div>
+        </form>
     </div>
 </div>
 

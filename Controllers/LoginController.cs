@@ -25,39 +25,37 @@ namespace SIMS.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
-                if (result.Succeeded)
-                {
-                    // Get the user who just logged in
-                    var user = await _userManager.FindByNameAsync(model.Username);
-                    if (user != null)
-                    {
-                        var roles = await _userManager.GetRolesAsync(user);
-                        var role = roles.FirstOrDefault(); // Get the primary role
+                // 1. Tìm user bằng Username (thay vì Email)
+                // Nếu file LoginViewModel của bạn viết là UserName (chữ N hoa) thì đổi lại thành model.UserName nhé
+                var user = await _userManager.FindByNameAsync(model.Username);
 
-                        // Redirect based on role
-                        if (role == "Admin")
+                if (user != null)
+                {
+                    // 2. Thay model.RememberMe bằng false (vì bạn không có chức năng này)
+                    var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, isPersistent: false, lockoutOnFailure: false);
+
+                    if (result.Succeeded)
+                    {
+                        // -- KIỂM TRA MẬT KHẨU MẶC ĐỊNH (ÉP ĐỔI LẦN ĐẦU) --
+                        var claims = await _userManager.GetClaimsAsync(user);
+                        if (claims.Any(c => c.Type == "MustChangePassword" && c.Value == "true"))
                         {
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("ChangePassword", "Auth");
                         }
-                        else if (role == "Student")
-                        {
-                            return RedirectToAction("Schedule", "Student");
-                        }
-                        else if (role == "Teacher")
-                        {
-                            return RedirectToAction("Schedule", "Teacher");
-                        }
+
+                        return RedirectToAction("Index", "Dashboard");
                     }
-                    // If there is no specific role, redirect to the default Home page
-                    return RedirectToAction("Index", "Home");
                 }
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+
+                // 3. THÔNG BÁO LỖI CHUNG CHUNG
+                ModelState.AddModelError(string.Empty, "Tên đăng nhập hoặc mật khẩu không chính xác.");
             }
+
             return View(model);
         }
 

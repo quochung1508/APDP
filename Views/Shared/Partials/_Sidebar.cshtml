@@ -59,9 +59,15 @@
                 @if (User.IsInRole("Student"))
                 {
                     <div class="sb-sidenav-menu-heading">Student Menu</div>
+                    
                     <a class="nav-link" href="@Url.Action("Schedule", "Student")">
                         <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
-                        View Schedule
+                        Lịch học (Schedule)
+                    </a>
+                    
+                    <a class="nav-link" href="@Url.Action("AttendanceReport", "Student")">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-pie"></i></div>
+                        Báo cáo Điểm danh
                     </a>
                 }
 
@@ -71,6 +77,10 @@
                     <a class="nav-link" href="@Url.Action("Schedule", "Teacher")">
                         <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
                         View Teaching Schedule
+                    </a>
+                    <a class="nav-link" href="@Url.Action("Index", "Attendance")">
+                        <div class="sb-nav-link-icon"><i class="fas fa-clipboard-check"></i></div>
+                        Attendance
                     </a>
 
                 }
